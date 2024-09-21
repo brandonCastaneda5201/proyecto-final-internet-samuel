@@ -24,6 +24,8 @@
                 <th>Fecha de Publicacion</th>
                 <th>Paginas</th>
                 <th>Editar</th>
+                <th>Ver detalles</th>
+                <th>Borrar</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +41,12 @@
                 <td>{{ $libro->fecha_publicacion }}</td>
                 <td>{{ $libro->paginas }}</td>
                 <td><a href="{{ route('libro.edit', $libro) }}">Editar</a></td>
+                <td><a href="{{ route('libro.show', $libro) }}">Ver</a></td>
+                <td>    <form action="{{ route('libro.destroy', $libro) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="submit" value="Borrar">
+                        </form></td>
             </tr>
             @endforeach
         </tbody>

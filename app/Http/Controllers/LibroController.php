@@ -49,7 +49,7 @@ class LibroController extends Controller
      */
     public function show(Libro $libro)
     {
-        //
+        return view('show-noticia', compact('libro'));
     }
 
     /**
@@ -66,7 +66,7 @@ class LibroController extends Controller
     public function update(Request $request, Libro $libro)
     {
         $request->validate([
-            'titulo' => ['required', 'max:255'],
+            'titulo' => ['required', 'max:255', 'unique:libros'],
             'autor' => ['required', 'max:255'],
             'editorial' => ['required', 'max:255'],
             'edicion' => ['required', 'max:255'],
@@ -85,6 +85,7 @@ class LibroController extends Controller
      */
     public function destroy(Libro $libro)
     {
-        //
+        $libro->delete();
+        return redirect()->route('libro.index');
     }
 }

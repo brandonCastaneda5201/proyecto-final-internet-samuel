@@ -9,6 +9,15 @@
 <body>
     <h1>Editar Libro "{{$libro->titulo}}"</h1>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('libro.update', $libro) }}" method="POST">
         @csrf
         
@@ -39,5 +48,7 @@
 
         <input type="submit" value="Enviar">
     </form>
+    <a href="{{ route('libro.index') }}">Volver a todos los libros</a><br>
+    <td><a href="{{ route('libro.show', $libro) }}">Ver libro</a></td>
 </body>
 </html>
