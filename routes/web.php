@@ -24,3 +24,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get("/landing-exitoso-pavlova", function() {
+    return view("landing");
+});
