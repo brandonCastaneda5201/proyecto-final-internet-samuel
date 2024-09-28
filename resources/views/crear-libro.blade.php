@@ -1,15 +1,6 @@
-<x-layout>
+<x-layout titulo="Crear un libro">
     <h1>Crear Libro</h1>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <a class="text-white-no-decor" href="{{ route('libro.index') }}"><button class="btn btn-gradient-info btn-rounded btn-fw border-bottom-separate">Volver al listado</button></a><br>
     <div class="col-12 grid-margin">
         <div class="card">
             <div class="card-body">
@@ -73,14 +64,6 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group row">
-                        <label for="paginas" class="col-sm-3 col-form-label">Paginas:</label>
-                        <div class="col-sm-9">
-                            <input id="paginas" name="paginas" value="{{ old('paginas') }}" type="number" class="form-control"/>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
                     <div class="form-group row">
                         <label for="sinopsis" class="col-form-label col-sm-3">Sinopsis:</label>
                         <div class="col-sm-9">
@@ -88,7 +71,25 @@
                         </div>
                     </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                        <label for="paginas" class="col-sm-3 col-form-label">Paginas:</label>
+                        <div class="col-sm-9">
+                            <input id="paginas" name="paginas" value="{{ old('paginas') }}" type="number" class="form-control"/>
+                        </div>
+                        </div>
+                    </div>
                 </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <button type="submit" class="btn btn-outline-primary btn-rounded btn-fw">Agregar Libro</button>
             </form>
             </div>
         </div>

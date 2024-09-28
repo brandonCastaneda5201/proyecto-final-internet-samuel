@@ -38,12 +38,12 @@
                                 <td>{{ $libro->stock }}</td>
                                 <td>{{ $libro->fecha_publicacion }}</td>
                                 <td>{{ $libro->paginas }}</td>
-                                <td><a href="{{ route('libro.edit', $libro) }}">Editar</a></td>
-                                <td><a href="{{ route('libro.show', $libro) }}">Ver</a></td>
+                                <td><a href="{{ route('libro.edit', $libro) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a></td>
+                                <td><a href="{{ route('libro.show', $libro) }}"><button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button></a></td>
                                 <td>    <form action="{{ route('libro.destroy', $libro) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <input type="submit" value="Borrar">
+                                            <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>
                                         </form></td>
                             </tr>
                         @endforeach

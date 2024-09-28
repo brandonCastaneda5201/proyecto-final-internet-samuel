@@ -26268,6 +26268,30 @@ dl li {
   text-decoration: none !important;
 }
 
+.libro-detalles {
+  list-style-type: none; /* Quita los puntos de la lista */
+  padding: 0;
+  margin: 0;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.libro-detalles li {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #ce93d8; /* Fondo en tono morado claro */
+  color: white;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.libro-detalles li:hover {
+  background-color: #ab47bc; /* Color más oscuro al pasar el ratón */
+  cursor: pointer;
+}
+
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
   width: calc(100% - 260px);
@@ -26276,6 +26300,17 @@ dl li {
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
+}
+
+.table td{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10rem;
+}
+
+.border-bottom-separate{
+margin-bottom: 1rem;
 }
 
 .no-padding{
