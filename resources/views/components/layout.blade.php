@@ -18,15 +18,15 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset("purpleAdmin/css/style.css") }}">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <link rel="shortcut icon" href="{{ asset("images/favicon.png") }}" />
   </head>
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-          <a class="navbar-brand brand-logo" href="../../index.html"><img src="../../assets/images/logo.svg" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../assets/images/logo-mini.svg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="../../index.html"><img src="{{ asset("purpleAdmin/images/logo.svg") }}" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="{{ asset("purpleAdmin/images/logo-mini.svg") }}" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -46,7 +46,7 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="../../assets/images/faces/face1.jpg" alt="image">
+                  <img src="{{asset("smile.png") }}" alt="image">
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">
@@ -76,7 +76,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="../../assets/images/faces/face4.jpg" alt="image" class="profile-pic">
+                    <img src="{{asset("purpleAdmin/images/faces/face4.jpg") }}" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                     <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
@@ -86,7 +86,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="../../assets/images/faces/face2.jpg" alt="image" class="profile-pic">
+                    <img src="{{ asset("purpleAdmin/images/faces/face2.jpg") }}" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                     <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
@@ -96,7 +96,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="../../assets/images/faces/face3.jpg" alt="image" class="profile-pic">
+                    <img src="{{ asset("purpleAdmin/images/faces/face3.jpg") }}" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                     <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
@@ -178,7 +178,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="../../assets/images/faces/face1.jpg" alt="profile" />
+                  <img src="{{ asset("smile.png") }}" alt="profile" />
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
@@ -323,16 +323,16 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="{{ asset("purpleAdmin/vendors/js/vendor.bundle.base.js") }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="../../assets/js/off-canvas.js"></script>
-    <script src="../../assets/js/misc.js"></script>
-    <script src="../../assets/js/settings.js"></script>
-    <script src="../../assets/js/todolist.js"></script>
-    <script src="../../assets/js/jquery.cookie.js"></script>
+    <script src="{{asset("purpleAdmin/js/off-canvas.js") }}"></script>
+    <script src="{{asset("purpleAdmin/js/misc.js") }}"></script>
+    <script src="{{asset("purpleAdmin/js/settings.js") }}"></script>
+    <script src="{{asset("purpleAdmin/js/todolist.js") }} "></script>
+    <script src="{{asset("purpleAdmin/js/jquery.cookie.js") }} "></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
     <!-- End custom js for this page -->

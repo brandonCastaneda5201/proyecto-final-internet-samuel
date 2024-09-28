@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crear Libro</title>
-</head>
-<body>
+<x-layout>
     <h1>Crear Libro</h1>
 
     @if ($errors->any())
@@ -18,34 +10,87 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('libro.store') }}" method="POST">
-        @csrf
-
-        <label for="titulo">Titulo del libro:</label><br>
-        <input type="text" name="titulo" value="{{ old('titulo') }}"><br>
-
-        <label for="autor">Autor:</label><br>
-        <input type="text" name="autor" value="{{ old('autor') }}"><br>
-
-        <label for="editorial">Editorial:</label><br>
-        <input type="text" name="editorial" value="{{ old('editorial') }}"><br>
-
-        <label for="edicion">Edicion:</label><br>
-        <input type="text" name="edicion" value="{{ old('edicion') }}"><br>
-
-        <label for="sinopsis">Sinopsis:</label><br>
-        <textarea name="sinopsis" value="{{ old('sinopsis') }}"></textarea><br>
-
-        <label for="stock">Stock:</label><br>
-        <input type="number" name="stock" value="{{ old('stock') }}"><br>
-
-        <label for="paginas">Paginas:</label><br>
-        <input type="number" name="paginas" value="{{ old('paginas') }}"><br>
-        
-        <label for="fecha_publicacion">Fecha de publicacion:</label><br>
-        <input type="date" name="fecha_publicacion" id="fecha_publicacion" value="{{ old('fecha_publicacion') }}">
-
-        <input type="submit" value="Enviar">
-    </form>
-</body>
-</html>
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+            <h4 class="card-title">Completa el formulario</h4>
+            <form action="{{ route('libro.store') }}" method="POST" class="form-sample">
+                @csrf
+                <p class="card-description">Para crear un libro</p>
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                    <label for="titulo" class="col-sm-3 col-form-label">Titulo:</label>
+                    <div class="col-sm-9">
+                        <input id="titulo" name="titulo" value="{{ old('titulo') }}" type="text" class="form-control" />
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                    <label for="autor" class="col-sm-3 col-form-label">Autor:</label>
+                    <div class="col-sm-9">
+                        <input id="autor" name="autor" value="{{ old('autor') }}" type="text" class="form-control" />
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                    <label for="editorial" class="col-sm-3 col-form-label">Editorial:</label>
+                    <div class="col-sm-9">
+                        <input id="editorial" name="editorial" value="{{ old('editorial') }}" type="text" class="form-control"/>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                    <label for="fecha_publicacion" class="col-sm-3 col-form-label">Fecha de publicacion:</label>
+                    <div class="col-sm-9">
+                        <input id="fecha_publicacion" name="fecha_publicacion" value="{{ old('fecha_publicacion') }}" type="date" class="form-control" placeholder="dd/mm/yyyy" />
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                    <label for="edicion" class="col-sm-3 col-form-label">Edicion:</label>
+                    <div class="col-sm-9">
+                        <input id="edicion" name="edicion" value="{{ old('edicion') }}" type="text" class="form-control"/>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group row">
+                    <label for="stock" class="col-sm-3 col-form-label">Stock:</label>
+                    <div class="col-sm-9">
+                        <input id="stock" name="stock" value="{{ old('stock') }}" type="number" class="form-control"/>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                        <label for="paginas" class="col-sm-3 col-form-label">Paginas:</label>
+                        <div class="col-sm-9">
+                            <input id="paginas" name="paginas" value="{{ old('paginas') }}" type="number" class="form-control"/>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="sinopsis" class="col-form-label col-sm-3">Sinopsis:</label>
+                        <div class="col-sm-9">
+                            <textarea id="sinopsis" name="sinopsis" value="{{ old('sinopsis') }}" rows="8" class="form-control full-width"></textarea>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+</x-layout>

@@ -26263,6 +26263,11 @@ dl li {
   min-height: 100vh;
 }
 
+.text-white-no-decor{
+  color: white !important;
+  text-decoration: none !important;
+}
+
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
   width: calc(100% - 260px);
@@ -26272,6 +26277,19 @@ dl li {
   -webkit-flex-direction: column;
   flex-direction: column;
 }
+
+.no-padding{
+  padding: 0 !important;
+}
+
+.full-width{
+  width: 100% !important;
+}
+
+.overflow-scrollable-x{
+  overflow-x: scroll;
+}
+
 @media (max-width: 991px) {
   .main-panel {
     margin-left: 0;
