@@ -25032,6 +25032,20 @@ dl li {
     margin: auto;
   }
 }
+
+.logo-exito{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 100% !important;
+}
+
+.logo-exito img{
+  width: 8rem;
+  margin-left: 0 !important;
+  height: 4rem !important;
+}
+
 .auth .brand-logo {
   margin-bottom: 2rem;
 }

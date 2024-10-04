@@ -28,3 +28,5 @@ Route::middleware([
 Route::get("/landing-exitoso-pavlova", function() {
     return view("landing");
 });
+
+Route::redirect('/', '/libro', 301);
