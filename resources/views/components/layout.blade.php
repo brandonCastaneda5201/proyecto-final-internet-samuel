@@ -43,34 +43,39 @@
           </div>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
-              @if($user != null)
+              @auth
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="{{asset('storage/' . $user->profile_photo_path) ?? asset("smile.png") }}" alt="image">
+                  @if($user->profile_photo_path != NULL)
+                    <img src="{{asset('storage/' . $user->profile_photo_path) }}" alt="image">
+                  @else
+                    <img src="{{asset("smile.png") }}" alt="image">
+                  @endif
                   <span class="availability-status online"></span>
-                </div>
+                  </div>
                 <div class="nav-profile-text">
                   <p class="mb-1 text-black">{{ $user->name }}</p>
                 </div>
               </a>
-              @else
+              @endauth
+              @guest
               <a class="nav-link" href="{{ route('login') }}" aria-expanded="false">
                 <div class="nav-profile-text">
                   <p class="mb-1 text-black">Iniciar sesion</p>
                 </div>
               </a>
-              @endif
+              @endguest
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item" href="#">
                   <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
                 <div class="dropdown-divider"></div>
-                @if($user != null)
+                @auth
                 <form method="POST" action="{{ route('logout') }}">
                 @csrf
                   <button class="dropdown-item" type="submit">
                     <i class="mdi mdi-logout me-2 text-primary"></i> Cerrar Sesion </button>
                 </form>
-                @endif
+                @endauth
               </div>
             </li>
             <li class="nav-item d-none d-lg-block full-screen-link">
@@ -187,11 +192,15 @@
         <!-- partial:../../partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
-            @if($user != null)
+            @auth
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="{{ asset('storage/' . $user->profile_photo_path) ?? asset("smile.png") }}" alt="profile" />
+                  @if($user->profile_photo_path != NULL)
+                  <img src="{{ asset('storage/' . $user->profile_photo_path)}}" alt="profile" />
+                  @else
+                  <img src="{{asset("smile.png") }}" alt="profile" />
+                  @endif
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
@@ -202,7 +211,7 @@
                 
               </a>
             </li>
-            @endif
+            @endauth
             <li class="nav-item">
               <a class="nav-link" href="{{ route('libro.index') }}">
                 <span class="menu-title">Libros</span>
@@ -217,23 +226,25 @@
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  @if ($user != null)
+                  @auth
                     <li class="nav-item">
                       <a class="nav-link" href="{{ route('profile.show') }}">Perfil</a>
                     </li>
                     <li class="nav-item">
                       <form method="POST" action="{{ route('logout') }}">
+                        @csrf
                         <button type="submit" class="nav-link">Cerrar Sesion</button>
                       </form>
                     </li>
-                  @else
+                  @endauth
+                  @guest
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Iniciar sesion</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('register') }}">Registrarse</a>
                   </li>
-                  @endif
+                  @endguest
                 </ul>
               </div>
             </li>
