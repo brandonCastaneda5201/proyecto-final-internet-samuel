@@ -23,6 +23,12 @@
                         <th>Ver detalles</th>
                         <th>Borrar</th>
                     @endif
+                    @if($modelo == "etiqueta")
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Editar</th>
+                        <th>Borrar</th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +47,20 @@
                                 <td><a href="{{ route('libro.edit', $libro) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a></td>
                                 <td><a href="{{ route('libro.show', $libro) }}"><button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button></a></td>
                                 <td>    <form action="{{ route('libro.destroy', $libro) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>
+                                        </form></td>
+                            </tr>
+                        @endforeach
+                    @endif
+                    @if($modelo == "etiqueta")
+                        @foreach($elementos as $etiqueta)
+                            <tr>
+                                <td>{{ $etiqueta->id }}</td>
+                                <td>{{ $etiqueta->nombre }}</td>
+                                <td><a href="{{ route('etiqueta.edit', $etiqueta) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a></td>
+                                <td>    <form action="{{ route('etiqueta.destroy', $etiqueta) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>

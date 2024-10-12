@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\EtiquetaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Ruta para los libros
 Route::resource('libro', LibroController::class)->parameters(['libro' => 'libro']);
+
+//Ruta para las etiquetas
+Route::resource('etiqueta', EtiquetaController::class)->parameters(['etiqueta' => 'etiqueta']);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
