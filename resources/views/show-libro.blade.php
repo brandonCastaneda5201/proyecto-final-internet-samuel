@@ -11,6 +11,12 @@
             <li>Edicion: {{ $libro->edicion }}</li>
             <li>Paginas: {{ $libro->paginas }}</li>
             <li>Stock: {{ $libro->stock }}</li>
+            <span>Etiquetas: </span>
+            @foreach ($libro->etiquetas as $etiqueta)
+                <li value="{{ $etiqueta->id }}">
+                    {{ $etiqueta->nombre }}
+                </li>
+            @endforeach
         </ul>
     </p>
     <a href="{{ route('libro.index') }}"><button class="btn btn-gradient-info btn-rounded btn-fw mb-2">Volver a todos los libros</button></a><br>

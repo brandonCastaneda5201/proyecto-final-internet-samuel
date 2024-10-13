@@ -19,6 +19,7 @@
                         <th>Stock</th>
                         <th>Fecha de Publicacion</th>
                         <th>Paginas</th>
+                        <th>Etiquetas</th>
                         <th>Editar</th>
                         <th>Ver detalles</th>
                         <th>Borrar</th>
@@ -44,6 +45,11 @@
                                 <td>{{ $libro->stock }}</td>
                                 <td>{{ $libro->fecha_publicacion }}</td>
                                 <td>{{ $libro->paginas }}</td>
+                                <td>
+                                    @foreach($libro->etiquetas as $etiqueta)
+                                        {{ $etiqueta->nombre }}, 
+                                    @endforeach
+                                </td>
                                 <td><a href="{{ route('libro.edit', $libro) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a></td>
                                 <td><a href="{{ route('libro.show', $libro) }}"><button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button></a></td>
                                 <td>    <form action="{{ route('libro.destroy', $libro) }}" method="POST">

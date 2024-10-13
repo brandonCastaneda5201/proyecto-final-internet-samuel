@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Libro;
+use App\Models\Etiqueta;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -18,7 +19,7 @@ class LibroController extends Controller
      */
     public function index()
     {
-        $libros = Libro::all();
+        $libros = Libro::with(['etiquetas'])->get();
         return view ("listado-libros", compact("libros"));
     }
 
@@ -27,7 +28,9 @@ class LibroController extends Controller
      */
     public function create(Request $request)
     {
-        return view("crear-libro");
+        return view("crear-libro", [
+            'etiquetas' => Etiqueta::all(),
+        ]);
     }
 
     /**
@@ -44,9 +47,10 @@ class LibroController extends Controller
             'stock' => ['required', 'min:1'],
             'fecha_publicacion' => ['required', 'date'],
             'paginas' => ['required', 'min:1'],
+            'etiquetas' => ['required']
         ]);
         $libro = Libro::create($request->all());
-
+        $libro->etiquetas()->attach($request->etiquetas);
         return redirect()->route('libro.index');
     }
 
@@ -55,6 +59,7 @@ class LibroController extends Controller
      */
     public function show(Libro $libro)
     {
+        $libro->load('etiquetas');
         return view('show-libro', compact('libro'));
     }
 
@@ -63,7 +68,9 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
-        return view("edit-libro", compact("libro"));
+        $etiquetas = Etiqueta::all();
+        $libro->load('etiquetas');
+        return view("edit-libro", compact("libro", "etiquetas"));
     }
 
     /**
@@ -82,7 +89,7 @@ class LibroController extends Controller
             'paginas' => ['required', 'min:1'],
         ]);
         $libro->update($request->all());
-
+        $libro->etiquetas()->sync($request->etiquetas);
         return redirect()->route('libro.index');
     }
 
