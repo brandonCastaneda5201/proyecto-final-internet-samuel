@@ -66,8 +66,8 @@
               </a>
               @endguest
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
+                <a class="dropdown-item" href="{{ route('profile.show') }}">
+                  <i class="fa fa-user-circle me-2 text-success"></i> Mi Perfil </a>
                 <div class="dropdown-divider"></div>
                 @auth
                 <form method="POST" action="{{ route('logout') }}">
