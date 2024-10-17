@@ -28,6 +28,7 @@ class LibroController extends Controller
      */
     public function create(Request $request)
     {
+        
         return view("crear-libro", [
             'etiquetas' => Etiqueta::all(),
         ]);
@@ -68,6 +69,7 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
+        //Gate::authorize("update-libro", $libro);
         $etiquetas = Etiqueta::all();
         $libro->load('etiquetas');
         return view("edit-libro", compact("libro", "etiquetas"));
