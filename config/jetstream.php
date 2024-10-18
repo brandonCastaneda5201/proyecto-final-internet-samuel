@@ -63,6 +63,10 @@ return [
         // Features::api(),
         Features::teams(['invitations' => true]),
         Features::accountDeletion(),
+<<<<<<< HEAD
+=======
+        Features::profilePhotos()
+>>>>>>> a896e740bcb64db0f518526dfabe0efa96ec6d2e
     ],
 
     /*

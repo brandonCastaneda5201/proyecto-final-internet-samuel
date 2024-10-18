@@ -4,12 +4,20 @@
             <x-authentication-card-logo />
         </x-slot>
 
+<<<<<<< HEAD
         <div class="mb-4 text-sm text-gray-600">
+=======
+        <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+>>>>>>> a896e740bcb64db0f518526dfabe0efa96ec6d2e
             {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
         </div>
 
         @if (session('status'))
+<<<<<<< HEAD
             <div class="mb-4 font-medium text-sm text-green-600">
+=======
+            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+>>>>>>> a896e740bcb64db0f518526dfabe0efa96ec6d2e
                 {{ session('status') }}
             </div>
         @endif

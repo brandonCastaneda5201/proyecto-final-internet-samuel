@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white', 'dropdownClasses' => ''])
+=======
+@props(['align' => 'right', 'width' => '48', 'contentClasses' => 'py-1 bg-white dark:bg-gray-700', 'dropdownClasses' => ''])
+>>>>>>> a896e740bcb64db0f518526dfabe0efa96ec6d2e
 
 @php
 switch ($align) {
