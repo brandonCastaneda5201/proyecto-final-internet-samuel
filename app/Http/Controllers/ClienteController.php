@@ -12,7 +12,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::all();
+        return view("listado-clientes", compact("clientes"));
     }
 
     /**
@@ -20,7 +21,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view("crear-cliente");
     }
 
     /**
@@ -28,7 +29,17 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'max:255'],
+            'apellido' => ['required', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:clientes'],
+            'telefono' => ['nullable', 'max:15'],
+            'direccion' => ['nullable', 'max:255'],
+        ]);
+
+        Cliente::create($request->all());
+
+        return redirect()->route('cliente.index');
     }
 
     /**
@@ -36,7 +47,7 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-        //
+        return view('show-cliente', compact('cliente'));
     }
 
     /**
@@ -44,7 +55,7 @@ class ClienteController extends Controller
      */
     public function edit(Cliente $cliente)
     {
-        //
+        return view("edit-cliente", compact("cliente"));
     }
 
     /**
@@ -52,7 +63,17 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'max:255'],
+            'apellido' => ['required', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:clientes,email,' . $cliente->id],
+            'telefono' => ['nullable', 'max:15'],
+            'direccion' => ['nullable', 'max:255'],
+        ]);
+
+        $cliente->update($request->all());
+
+        return redirect()->route('cliente.index');
     }
 
     /**
@@ -60,6 +81,7 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
+        return redirect()->route('cliente.index');
     }
 }
