@@ -18,11 +18,11 @@
         @livewireStyles
     </head>
     <body>
-<<<<<<< HEAD
+
         <div class="font-sans text-gray-900 antialiased">
-=======
+
         <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
->>>>>>> a896e740bcb64db0f518526dfabe0efa96ec6d2e
+
             {{ $slot }}
         </div>
 

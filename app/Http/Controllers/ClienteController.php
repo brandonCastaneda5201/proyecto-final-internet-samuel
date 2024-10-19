@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
     /**
      * Display a listing of the resource.
      */

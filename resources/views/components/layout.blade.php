@@ -225,6 +225,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{{ route('cliente.index') }}">
+               <span class="menu-title">Clientes</span>
+                <i class="fa fa-users menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Cuenta</span>
                 <i class="menu-arrow"></i>
