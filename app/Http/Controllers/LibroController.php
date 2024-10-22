@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LibroCreado;
 use App\Models\Libro;
 use App\Models\Etiqueta;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Mail;
+
+use function PHPSTORM_META\map;
 
 class LibroController extends Controller
 {
@@ -52,6 +57,10 @@ class LibroController extends Controller
         ]);
         $libro = Libro::create($request->all());
         $libro->etiquetas()->attach($request->etiquetas);
+        $usuarios = User::pluck("email");
+        foreach($usuarios as $usuario){
+            Mail.to($usuario)->send(new LibroCreado($libro));
+        }
         return redirect()->route('libro.index');
     }
 
