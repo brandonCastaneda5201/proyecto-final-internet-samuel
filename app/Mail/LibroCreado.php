@@ -38,7 +38,7 @@ class LibroCreado extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.emails.libro-creado',
+            view: 'emails.libro-creado',
         );
     }
 

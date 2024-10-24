@@ -1,5 +1,6 @@
 <x-layout :titulo="'Libro: ' . $libro->titulo">
     <h1>{{ $libro->titulo }}</h1>
+    <img src="{{ asset('storage/app/public/portada/' . $libro->nombre_original) }}" />
     <p>
         {{ $libro->sinopsis }}
     </p>

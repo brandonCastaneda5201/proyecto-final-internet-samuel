@@ -15,4 +15,7 @@ class Libro extends Model
     public function etiquetas(){
         return $this->belongsToMany(Etiqueta::class);
     }
+    public function archivo(){
+        return $this->hasOne(Archivo::class);
+    }
 }

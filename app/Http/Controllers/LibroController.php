@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\LibroCreado;
+use App\Models\Archivo;
 use App\Models\Libro;
 use App\Models\Etiqueta;
 use App\Models\User;
@@ -56,10 +57,16 @@ class LibroController extends Controller
             'etiquetas' => ['required']
         ]);
         $libro = Libro::create($request->all());
+        $ruta = $request->portada->store("portada", "public");
+        $archivo = new Archivo([
+            "nombre_original" => $request->portada->getClientOriginalName(),
+            "ruta" => $ruta
+        ]);
+        $libro->archivo()->save($archivo);
         $libro->etiquetas()->attach($request->etiquetas);
         $usuarios = User::pluck("email");
         foreach($usuarios as $usuario){
-            Mail.to($usuario)->send(new LibroCreado($libro));
+            Mail::to($usuario)->send(new LibroCreado($libro));
         }
         return redirect()->route('libro.index');
     }
@@ -70,6 +77,7 @@ class LibroController extends Controller
     public function show(Libro $libro)
     {
         $libro->load('etiquetas');
+        $libro->load("archivo");
         return view('show-libro', compact('libro'));
     }
 
