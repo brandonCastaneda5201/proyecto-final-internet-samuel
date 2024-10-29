@@ -15,9 +15,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label for="nombre" class="col-sm-3 col-form-label">Nombre:</label>
+                                <label for="name" class="col-sm-3 col-form-label">Nombre:</label>
                                 <div class="col-sm-9">
-                                    <input id="nombre" name="nombre" value="{{ old('nombre') }}" type="text" class="form-control" />
+                                    <input id="name" name="name" value="{{ old('name') }}" type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -62,6 +62,16 @@
                             </div>
                         </div>
                     </div>
+
+                    
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-3 col-form-label">Contraseña:</label>
+                                <div class="col-sm-9">
+                                    <input id="password" name="password" value="{{ old('password') }}" type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
                     
                     @if ($errors->any())
                         <div class="alert alert-danger">
