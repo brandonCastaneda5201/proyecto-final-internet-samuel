@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
             <h4 class="card-title">Completa el formulario</h4>
-            <form action="{{ route('libro.store') }}" method="POST" class="form-sample">
+            <form action="{{ route('libro.store') }}" method="POST" class="form-sample" enctype="multipart/form-data">
                 @csrf
                 <p class="card-description">Para crear un libro</p>
                 <div class="row">
@@ -93,7 +93,14 @@
                                 @endforeach
                             </select>
                         </div>
+
                     </div>
+                    <div class="form-group row">
+                                <label for="portada" class="col-sm-3 col-form-label">Portada:</label>
+                                <div class="col-sm-9">
+                                    <input type="file" id="portada" name="portada" class="form-control"/>
+                                </div>
+                            </div>
                     </div>
                 </div>
                 @if ($errors->any())

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("fecha_publicacion");
             $table->integer("paginas")->min(1)->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

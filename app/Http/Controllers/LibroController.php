@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LibroCreado;
+use App\Models\Archivo;
 use App\Models\Libro;
 use App\Models\Etiqueta;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Mail;
+
+use function PHPSTORM_META\map;
 
 class LibroController extends Controller
 {
@@ -28,6 +34,7 @@ class LibroController extends Controller
      */
     public function create(Request $request)
     {
+        
         return view("crear-libro", [
             'etiquetas' => Etiqueta::all(),
         ]);
@@ -50,7 +57,17 @@ class LibroController extends Controller
             'etiquetas' => ['required']
         ]);
         $libro = Libro::create($request->all());
+        $ruta = $request->portada->store("portada", "public");
+        $archivo = new Archivo([
+            "nombre_original" => $request->portada->getClientOriginalName(),
+            "ruta" => $ruta
+        ]);
+        $libro->archivo()->save($archivo);
         $libro->etiquetas()->attach($request->etiquetas);
+        $usuarios = User::pluck("email");
+        foreach($usuarios as $usuario){
+            Mail::to($usuario)->send(new LibroCreado($libro));
+        }
         return redirect()->route('libro.index');
     }
 
@@ -60,6 +77,7 @@ class LibroController extends Controller
     public function show(Libro $libro)
     {
         $libro->load('etiquetas');
+        $libro->load("archivo");
         return view('show-libro', compact('libro'));
     }
 
@@ -68,6 +86,7 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
+        //Gate::authorize("update-libro", $libro);
         $etiquetas = Etiqueta::all();
         $libro->load('etiquetas');
         return view("edit-libro", compact("libro", "etiquetas"));
