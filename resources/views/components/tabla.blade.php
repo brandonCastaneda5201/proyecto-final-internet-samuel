@@ -100,8 +100,8 @@
                                 @if($modelo == "cliente")
                                     @foreach($elementos as $cliente)
                                         <tr>
-                                            <td>{{ $cliente->id }}</td>
-                                            <td>{{ $cliente->nombre }}</td>
+                                        <td>{{ $cliente->id }}</td>
+                                            <td>{{ $cliente->name }}</td>
                                             <td>{{ $cliente->apellido }}</td>
                                             <td>{{ $cliente->email }}</td>
                                             <td>{{ $cliente->telefono }}</td>

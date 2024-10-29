@@ -15,9 +15,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label for="nombre" class="col-sm-3 col-form-label">Nombre:</label>
+                                <label for="name" class="col-sm-3 col-form-label">Nombre:</label>
                                 <div class="col-sm-9">
-                                    <input id="nombre" name="nombre" value="{{ old('nombre') ?? $cliente->nombre }}" type="text" class="form-control" />
+                                    <input id="name" name="name" value="{{ old('name') ?? $cliente->name }}" type="text" class="form-control" />
                                 </div>
                             </div>
                         </div>
@@ -54,6 +54,15 @@
                                 <label for="direccion" class="col-sm-3 col-form-label">Dirección:</label>
                                 <div class="col-sm-9">
                                     <input id="direccion" name="direccion" value="{{ old('direccion') ?? $cliente->direccion }}" type="text" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-3 col-form-label">Contraseña:</label>
+                                <div class="col-sm-9">
+                                    <input id="password" name="password"  type="text" class="form-control"/>
                                 </div>
                             </div>
                         </div>

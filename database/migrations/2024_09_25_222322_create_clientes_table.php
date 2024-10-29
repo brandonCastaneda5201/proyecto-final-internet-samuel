@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        return;
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string("nombre")->max(255);
