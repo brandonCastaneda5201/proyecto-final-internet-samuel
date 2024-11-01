@@ -1,5 +1,5 @@
 <x-layout :titulo="'Cliente: ' . $cliente->nombre . ' ' . $cliente->apellido">
-    <h1>{{ $cliente->nombre }} {{ $cliente->apellido }}</h1>
+    <h1>{{ $cliente->name }} {{ $cliente->apellido }}</h1>
     <p>
         <ul class="cliente-detalles">
             <li>Email: {{ $cliente->email }}</li>

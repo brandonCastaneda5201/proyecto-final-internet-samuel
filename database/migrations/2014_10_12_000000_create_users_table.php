@@ -13,19 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();  // Nombre completo, puedes ajustar si prefieres separar nombre y apellido
-            $table->string('email')->nullable();
+            $table->string('name');
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->rememberToken()->nullable();
+            $table->string('password');
+            $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             
             // Campos de clientes añadidos
-     
-            $table->string('apellido')->nullable()->max(255);
-            $table->string('telefono')->nullable()->max(15);
-            $table->string('direccion')->nullable()->max(255);
+            $table->string('apellido')->max(255);
+            $table->string('telefono')->max(15);
+            $table->string('direccion')->max(255);
 
             $table->timestamps();
         });
