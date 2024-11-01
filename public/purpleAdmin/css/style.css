@@ -26323,6 +26323,14 @@ dl li {
   max-width: 10rem;
 }
 
+.table td:last-child{
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .border-bottom-separate{
 margin-bottom: 1rem;
 }

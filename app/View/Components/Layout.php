@@ -17,8 +17,11 @@ class Layout extends Component
     public function __construct($titulo = "Libreria")
     {
         $this->titulo = $titulo;
-        $this->user = Auth::user();
-        //
+        if (Auth::check()) {
+            $this->user = Auth::user()->load('permiso');
+        } else {
+            $this->user = null;
+        }
     }
 
     /**

@@ -3,6 +3,7 @@
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EtiquetaController;
+use App\Http\Controllers\PermisoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,9 @@ Route::resource('cliente', ClienteController::class)->parameters(['cliente' => '
 
 // Ruta para las etiquetas
 Route::resource('etiqueta', EtiquetaController::class)->parameters(['etiqueta' => 'etiqueta']);
+
+// Ruta para los permisos
+Route::resource('permiso', PermisoController::class)->parameters(['permiso' => 'permiso']);
 
 Route::middleware([
     'auth:sanctum',

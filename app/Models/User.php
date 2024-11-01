@@ -61,4 +61,22 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function permiso(){
+        return $this->hasOne(Permiso::class);
+    }
+
+    public function hasPermission($permissionName)
+    {
+        // Obtiene el permiso correspondiente en la tabla de permisos
+        $permiso = $this->permiso();
+
+        // Verifica si el permiso existe en la tabla de permisos y retorna su valor
+        if (!$permiso) {
+            return false; // Si no se encuentra ningún permiso
+        }
+
+        // Usamos el nombre del permiso para acceder a la columna adecuada
+        return $permiso->{$permissionName} ?? false;
+    }
 }

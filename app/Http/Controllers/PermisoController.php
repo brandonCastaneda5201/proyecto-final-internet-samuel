@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permiso;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PermisoController extends Controller
@@ -12,7 +13,8 @@ class PermisoController extends Controller
      */
     public function index()
     {
-        //
+        $permisos = Permiso::with(['user'])->get();
+        return view ("listado-permisos", compact("permisos"));    
     }
 
     /**

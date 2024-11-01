@@ -1,6 +1,8 @@
 <x-layout :titulo="'Libro: ' . $libro->titulo">
     <h1>{{ $libro->titulo }}</h1>
+    @if($libro->archivo)
     <img src="{{ Storage::url($libro->archivo->ruta) }}" />
+    @endif
     <p>
         {{ $libro->sinopsis }}
     </p>
