@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="{{ asset("purpleAdmin/vendors/font-awesome/css/font-awesome.min.css") }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{asset("purpleAdmin/vendors/select2/select2.min.css")}}">
+    <link rel="stylesheet" href="{{asset("purpleAdmin/vendors/select2-bootstrap-theme/select2-bootstrap.min.css")}}">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -293,6 +295,9 @@
     <script src="{{ asset("purpleAdmin/vendors/js/vendor.bundle.base.js") }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+    <script src="{{asset("purpleAdmin/vendors/select2/select2.min.js") }}"></script>
+    <script src="{{asset("purpleAdmin/vendors/typeahead.js/typeahead.bundle.min.js") }}"></script>
+    <script src="{{asset("purpleAdmin/js/select2.js") }}"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="{{asset("purpleAdmin/js/off-canvas.js") }}"></script>

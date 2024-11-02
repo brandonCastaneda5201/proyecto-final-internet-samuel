@@ -59,6 +59,7 @@ class CreateNewUser implements CreatesNewUsers
             'create-compra' => false,
             'edit-compra' => false,
             'delete-compra' => false,
+            'compra-libro' => true,
         ]);
 
         return $user;

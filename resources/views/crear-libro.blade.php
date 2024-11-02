@@ -81,26 +81,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                <div class="col-md-6">
                     <div class="form-group row">
-                        <label for="etiquetas" class="col-form-label col-sm-3">Etiquetas:</label>
-                        <div class="col-sm-9">
-                            <select id="etiquetas" name="etiquetas[]" rows="8" class="form-control full-width" multiple>
-                                @foreach ($etiquetas as $etiqueta)
-                                    <option value="{{ $etiqueta->id }}">
-                                        {{ $etiqueta->nombre }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
+                        <label for="etiquetas">Etiquetas</label>
+                        <select name="etiquetas[]" class="js-example-basic-multiple" multiple style="width:100%">
+                            @foreach($etiquetas as $etiqueta)
+                                <option value="{{ $etiqueta->id }}">
+                                    {{ $etiqueta->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
+                </div>
+                <div class="col-md-6">
                     <div class="form-group row">
-                                <label for="portada" class="col-sm-3 col-form-label">Portada:</label>
-                                <div class="col-sm-9">
-                                    <input type="file" id="portada" name="portada" class="form-control"/>
-                                </div>
-                            </div>
+                        <label for="portada" class="col-sm-3 col-form-label">Portada:</label>
+                        <div class="col-sm-9">
+                            <input type="file" id="portada" name="portada" class="form-control"/>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 @if ($errors->any())

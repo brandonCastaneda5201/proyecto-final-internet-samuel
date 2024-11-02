@@ -4,13 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -66,17 +67,4 @@ class User extends Authenticatable
         return $this->hasOne(Permiso::class);
     }
 
-    public function hasPermission($permissionName)
-    {
-        // Obtiene el permiso correspondiente en la tabla de permisos
-        $permiso = $this->permiso();
-
-        // Verifica si el permiso existe en la tabla de permisos y retorna su valor
-        if (!$permiso) {
-            return false; // Si no se encuentra ningún permiso
-        }
-
-        // Usamos el nombre del permiso para acceder a la columna adecuada
-        return $permiso->{$permissionName} ?? false;
-    }
 }

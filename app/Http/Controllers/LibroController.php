@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\map;
 
@@ -34,7 +35,7 @@ class LibroController extends Controller
      */
     public function create(Request $request)
     {
-        
+        $this->authorize('create', Libro::class);
         return view("crear-libro", [
             'etiquetas' => Etiqueta::all(),
         ]);
@@ -45,6 +46,7 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Libro::class);
         $request->validate([
             'titulo' => ['required', 'max:255', 'unique:libros'],
             'autor' => ['required', 'max:255'],

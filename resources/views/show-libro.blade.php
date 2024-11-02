@@ -23,5 +23,7 @@
         </ul>
     </p>
     <a href="{{ route('libro.index') }}"><button class="btn btn-gradient-info btn-rounded btn-fw mb-2">Volver a todos los libros</button></a><br>
-    <a href="{{ route('libro.edit', $libro) }}"><button class="btn btn-gradient-warning btn-rounded btn-fw">Editar</button></a><br>
+    @can('edit', App\Models\Libro::class)
+        <a href="{{ route('libro.edit', $libro) }}"><button class="btn btn-gradient-warning btn-rounded btn-fw">Editar</button></a><br>
+    @endcan
 </x-layout>

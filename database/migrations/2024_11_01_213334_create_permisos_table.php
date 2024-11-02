@@ -41,6 +41,9 @@ return new class extends Migration
             $table->boolean("show-permiso")->default(false);
             $table->boolean("edit-permiso")->default(false);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+            // Permiso para compras de libros
+            $table->boolean("compra-libro")->default(true);
             $table->timestamps();
         });
     }

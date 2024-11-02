@@ -83,11 +83,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                    <div class="form-group row">
-                        <label for="etiquetas" class="col-form-label col-sm-3">Etiquetas:</label>
-                        <div class="col-sm-9">
-                            <select id="etiquetas" name="etiquetas[]" rows="8" class="form-control full-width" multiple>
-                                @foreach ($etiquetas as $etiqueta)
+                        <div class="form-group row">
+                            <label for="etiquetas">Etiquetas</label>
+                            <select name="etiquetas[]" class="js-example-basic-multiple" multiple style="width:100%">
+                                @foreach($etiquetas as $etiqueta)
                                     <option value="{{ $etiqueta->id }}" @if(in_array($etiqueta->id, $libro->etiquetas->pluck('id')->toArray())) selected @endif>
                                         {{ $etiqueta->nombre }}
                                     </option>
@@ -95,8 +94,8 @@
                             </select>
                         </div>
                     </div>
-                    </div>
                 </div>
+
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

@@ -44,24 +44,25 @@
                                         <th>ID</th>
                                         <th>ID del usuario</th>
                                         <th>Nombre Completo</th>
-                                        <th>Clientes:C</th>
                                         <th>Clientes:R</th>
+                                        <th>Clientes:C</th>
                                         <th>Clientes:U</th>
                                         <th>Clientes:D</th>
-                                        <th>Compras:C</th>
                                         <th>Compras:R</th>
+                                        <th>Compras:C</th>
                                         <th>Compras:U</th>
                                         <th>Compras:D</th>
                                         <th>Permisos:R</th>
                                         <th>Permisos:U</th>
-                                        <th>Libros:C</th>
                                         <th>Libros:R</th>
+                                        <th>Libros:C</th>
                                         <th>Libros:U</th>
                                         <th>Libros:D</th>
-                                        <th>Etiquetas:C</th>
                                         <th>Etiquetas:R</th>
+                                        <th>Etiquetas:C</th>
                                         <th>Etiquetas:U</th>
                                         <th>Etiquetas:D</th>
+                                        <th>Compra:Libros</th>
                                         <th>Acciones</th>
                                     @endif
                                 </tr>
@@ -85,13 +86,18 @@
                                                     {{ $etiqueta->nombre }},
                                                 @endforeach
                                             </td>
-                                            <td><a href="{{ route('libro.edit', $libro) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
-                                            <a href="{{ route('libro.show', $libro) }}"><button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button></a>
+                                            <td>
+                                            @can('edit', $libro)   
+                                                <a href="{{ route('libro.edit', $libro) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
+                                            @endif
+                                                <a href="{{ route('libro.show', $libro) }}"><button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button></a>
+                                            @can('delete', $libro) 
                                                 <form action="{{ route('libro.destroy', $libro) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>
                                                 </form>
+                                            @endcan
                                             </td>
                                         </tr>
                                     @endforeach
@@ -142,7 +148,7 @@
                                         <tr>
                                             <td>{{ $permiso->id }}</td>
                                             <td>{{ $permiso->user->id }}</td>
-                                            <td>{{ $permiso->user->name }}</td>
+                                            <td>{{ $permiso->user->name }} {{ $permiso->user->apellido }}</td>
                                             {{-- Clientes --}}
                                             <td>
                                                 @if($permiso->getAttribute('show-cliente')) 
@@ -269,6 +275,13 @@
                                             </td>
                                             <td>
                                                 @if($permiso->getAttribute('delete-etiqueta')) 
+                                                    <i class="fa fa-check-circle text-success"></i>
+                                                @else
+                                                    <i class="fa fa-times text-danger"></i>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($permiso->getAttribute('compra-libro')) 
                                                     <i class="fa fa-check-circle text-success"></i>
                                                 @else
                                                     <i class="fa fa-times text-danger"></i>

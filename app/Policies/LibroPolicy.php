@@ -13,7 +13,7 @@ class LibroPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+
     }
 
     /**
@@ -21,7 +21,7 @@ class LibroPolicy
      */
     public function view(User $user, Libro $libro): bool
     {
-        //
+
     }
 
     /**
@@ -29,7 +29,7 @@ class LibroPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->permiso->getAttribute('create-libro');
     }
 
     /**
@@ -37,7 +37,12 @@ class LibroPolicy
      */
     public function update(User $user, Libro $libro): bool
     {
-        //
+        return $user->permiso->getAttribute('edit-libro');
+    }
+
+    public function edit(User $user): bool
+    {
+        return $user->permiso->getAttribute('edit-libro');
     }
 
     /**
@@ -45,7 +50,7 @@ class LibroPolicy
      */
     public function delete(User $user, Libro $libro): bool
     {
-        //
+        return $user->permiso->getAttribute('delete-libro');
     }
 
     /**
