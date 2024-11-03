@@ -61,9 +61,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    
                         <div class="col-md-6">
                             <div class="form-group row">
                                 <label for="password" class="col-sm-3 col-form-label">Contraseña:</label>
@@ -72,6 +69,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                     
                     @if ($errors->any())
                         <div class="alert alert-danger">

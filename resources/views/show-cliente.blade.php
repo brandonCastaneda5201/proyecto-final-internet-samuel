@@ -10,7 +10,9 @@
     <a href="{{ route('cliente.index') }}">
         <button class="btn btn-gradient-info btn-rounded btn-fw mb-2">Volver a todos los clientes</button>
     </a><br>
-    <a href="{{ route('cliente.edit', $cliente) }}">
-        <button class="btn btn-gradient-warning btn-rounded btn-fw">Editar</button>
-    </a><br>
+    @can('update', $cliente)
+        <a href="{{ route('cliente.edit', $cliente) }}">
+            <button class="btn btn-gradient-warning btn-rounded btn-fw">Editar</button>
+        </a><br>
+    @endcan
 </x-layout>

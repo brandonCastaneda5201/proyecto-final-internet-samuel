@@ -7,11 +7,16 @@ use Illuminate\Http\Request;
 
 class EtiquetaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Etiqueta::class);
         $etiquetas = Etiqueta::all();
         return view ("listado-etiquetas", compact("etiquetas"));
     }
@@ -21,6 +26,7 @@ class EtiquetaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Etiqueta::class);
         return view ("crear-etiqueta");
     }
 
@@ -29,6 +35,7 @@ class EtiquetaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Etiqueta::class);
         $request->validate([
             'nombre' => ['required', 'max:255', 'unique:etiquetas']
         ]);
@@ -50,7 +57,7 @@ class EtiquetaController extends Controller
      */
     public function edit(Etiqueta $etiqueta)
     {
-
+        $this->authorize('update', $etiqueta);
         return view('edit-etiqueta', compact('etiqueta'));
     }
 
@@ -59,6 +66,7 @@ class EtiquetaController extends Controller
      */
     public function update(Request $request, Etiqueta $etiqueta)
     {
+        $this->authorize('update', $etiqueta);
         $request->validate([
             'nombre' => ['required', 'max:255']
         ]);
@@ -72,6 +80,7 @@ class EtiquetaController extends Controller
      */
     public function destroy(Etiqueta $etiqueta)
     {
+        $this->authorize('delete', $etiqueta);
         $etiqueta->delete();
         return redirect()->route('etiqueta.index');
     }

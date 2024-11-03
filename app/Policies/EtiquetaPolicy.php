@@ -2,26 +2,18 @@
 
 namespace App\Policies;
 
-use App\Models\Libro;
 use App\Models\User;
+use App\Models\Etiqueta;
 use Illuminate\Auth\Access\Response;
 
-class LibroPolicy
+class EtiquetaPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->permiso->getAttribute('show-libro');
-    }
-
-    /**
-     * Determine whether the user can view the model.
-     */
-    public function view(User $user, Libro $libro): bool
-    {
-        return $user->permiso->getAttribute('show-libro');
+        return $user->permiso->getAttribute('show-etiqueta');
     }
 
     /**
@@ -29,34 +21,34 @@ class LibroPolicy
      */
     public function create(User $user): bool
     {
-        return $user->permiso->getAttribute('create-libro');
+        return $user->permiso->getAttribute('create-etiqueta');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Libro $libro): bool
+    public function update(User $user, Etiqueta $etiqueta): bool
     {
-        return $user->permiso->getAttribute('edit-libro');
+        return $user->permiso->getAttribute('edit-etiqueta');
     }
 
     public function edit(User $user): bool
     {
-        return $user->permiso->getAttribute('edit-libro');
+        return $user->permiso->getAttribute('edit-etiqueta');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Libro $libro): bool
+    public function delete(User $user, Etiqueta $etiqueta): bool
     {
-        return $user->permiso->getAttribute('delete-libro');
+        return $user->permiso->getAttribute('delete-etiqueta');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Libro $libro): bool
+    public function restore(User $user, Etiqueta $etiqueta): bool
     {
         //
     }
@@ -64,7 +56,7 @@ class LibroPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Libro $libro): bool
+    public function forceDelete(User $user, Etiqueta $etiqueta): bool
     {
         //
     }

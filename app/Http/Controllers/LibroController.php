@@ -88,7 +88,7 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
-        //Gate::authorize("update-libro", $libro);
+        $this->authorize('edit', Libro::class);
         $etiquetas = Etiqueta::all();
         $libro->load('etiquetas');
         return view("edit-libro", compact("libro", "etiquetas"));
@@ -99,6 +99,7 @@ class LibroController extends Controller
      */
     public function update(Request $request, Libro $libro)
     {
+        $this->authorize('update', $libro);
         $request->validate([
             'titulo' => ['required', 'max:255'],
             'autor' => ['required', 'max:255'],
@@ -119,6 +120,7 @@ class LibroController extends Controller
      */
     public function destroy(Libro $libro)
     {
+        $this->authorize('delete', $libro);
         $libro->delete();
         return redirect()->route('libro.index');
     }

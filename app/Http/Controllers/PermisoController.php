@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 
 class PermisoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
+        $this->authorize('viewAny', Permiso::class);
         $permisos = Permiso::with(['user'])->get();
         return view ("listado-permisos", compact("permisos"));    
     }
@@ -22,7 +24,7 @@ class PermisoController extends Controller
      */
     public function create()
     {
-        //
+        return view ("errors.404");
     }
 
     /**
@@ -30,7 +32,7 @@ class PermisoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view ("errors.404");
     }
 
     /**
@@ -38,7 +40,7 @@ class PermisoController extends Controller
      */
     public function show(Permiso $permiso)
     {
-        //
+        return view ("errors.404");
     }
 
     /**
@@ -46,6 +48,7 @@ class PermisoController extends Controller
      */
     public function edit(Permiso $permiso)
     {
+        $this->authorize('update', $permiso);
         $permiso->load('user');
         return view('edit-permisos', compact('permiso'));
     }
@@ -55,6 +58,7 @@ class PermisoController extends Controller
      */
     public function update(Request $request, Permiso $permiso)
     {
+        $this->authorize('update', $permiso);
         $permiso->update([
             'show-libro' => $request->has('show-libro'),
             'create-libro' => $request->has('create-libro'),
@@ -74,7 +78,7 @@ class PermisoController extends Controller
             'delete-cliente' => $request->has('delete-cliente'),
             'show-permiso' => $request->has('show-permiso'),
             'edit-permiso' => $request->has('edit-permiso'),
-        ]);;
+        ]);
         return redirect()->route('permiso.index');
     }
 
@@ -83,6 +87,6 @@ class PermisoController extends Controller
      */
     public function destroy(Permiso $permiso)
     {
-        //
+        return view ("errors.404");
     }
 }

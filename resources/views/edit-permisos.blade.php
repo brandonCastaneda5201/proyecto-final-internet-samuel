@@ -1,6 +1,6 @@
 <x-layout :titulo="'Editar usuario \'' . $permiso->user->name . ' ' . $permiso->user->apellido . '\''">
     <h1>Editar Permisos de "{{ $permiso->user->name }} {{ $permiso->user->apellido }}"</h1>
-    <a class="text-white-no-decor" href="{{ route('cliente.index') }}">
+    <a class="text-white-no-decor" href="{{ route('permiso.index') }}">
         <button class="btn btn-gradient-info btn-rounded btn-fw border-bottom-separate">Volver al listado</button>
     </a>
     <br>

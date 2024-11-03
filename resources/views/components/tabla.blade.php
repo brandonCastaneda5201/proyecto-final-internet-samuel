@@ -109,12 +109,17 @@
                                         <tr>
                                             <td>{{ $etiqueta->id }}</td>
                                             <td>{{ $etiqueta->nombre }}</td>
-                                            <td><a href="{{ route('etiqueta.edit', $etiqueta) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
-                                                <form action="{{ route('etiqueta.destroy', $etiqueta) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>
-                                                </form>
+                                            <td> 
+                                                @can('update', $etiqueta)
+                                                    <a href="{{ route('etiqueta.edit', $etiqueta) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
+                                                @endcan
+                                                @can('delete', $etiqueta)
+                                                    <form action="{{ route('etiqueta.destroy', $etiqueta) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>
+                                                    </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
@@ -131,13 +136,19 @@
                                             <td>{{ $cliente->telefono }}</td>
                                             <td>{{ $cliente->direccion }}</td>
                                             <td>
-                                                <a href="{{ route('cliente.edit', $cliente) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
-                                                <a href="{{ route('cliente.show', $cliente) }}"><button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button></a>
-                                                <form action="{{ route('cliente.destroy', $cliente) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>
-                                                </form>
+                                                @can('update', $cliente)
+                                                    <a href="{{ route('cliente.edit', $cliente) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
+                                                @endcan
+                                                @can('view', $cliente)
+                                                    <a href="{{ route('cliente.show', $cliente) }}"><button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button></a>
+                                                @endcan
+                                                @can('delete', $cliente)
+                                                    <form action="{{ route('cliente.destroy', $cliente) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>
+                                                    </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
@@ -288,7 +299,9 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('permiso.edit', $permiso) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
+                                                @can('update', $permiso)
+                                                    <a href="{{ route('permiso.edit', $permiso) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

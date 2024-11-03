@@ -2,26 +2,25 @@
 
 namespace App\Policies;
 
-use App\Models\Libro;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class LibroPolicy
+class ClientePolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->permiso->getAttribute('show-libro');
+        return $user->permiso->getAttribute('show-cliente');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Libro $libro): bool
+    public function view(User $user, User $model): bool
     {
-        return $user->permiso->getAttribute('show-libro');
+        return $user->permiso->getAttribute('show-cliente');
     }
 
     /**
@@ -29,34 +28,29 @@ class LibroPolicy
      */
     public function create(User $user): bool
     {
-        return $user->permiso->getAttribute('create-libro');
+        return $user->permiso->getAttribute('create-cliente');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Libro $libro): bool
+    public function update(User $user, User $model): bool
     {
-        return $user->permiso->getAttribute('edit-libro');
-    }
-
-    public function edit(User $user): bool
-    {
-        return $user->permiso->getAttribute('edit-libro');
+        return $user->permiso->getAttribute('edit-cliente');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Libro $libro): bool
+    public function delete(User $user, User $model): bool
     {
-        return $user->permiso->getAttribute('delete-libro');
+        return $user->permiso->getAttribute('delete-cliente');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Libro $libro): bool
+    public function restore(User $user, User $model): bool
     {
         //
     }
@@ -64,7 +58,7 @@ class LibroPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Libro $libro): bool
+    public function forceDelete(User $user, User $model): bool
     {
         //
     }
