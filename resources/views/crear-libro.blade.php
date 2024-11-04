@@ -83,7 +83,7 @@
                 <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
-                        <label for="etiquetas">Etiquetas</label>
+                        <label for="etiquetas">Etiquetas:</label>
                         <select name="etiquetas[]" class="js-example-basic-multiple" multiple style="width:100%">
                             @foreach($etiquetas as $etiqueta)
                                 <option value="{{ $etiqueta->id }}">

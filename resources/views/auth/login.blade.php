@@ -18,7 +18,7 @@
             <input type="email" class="form-control form-control-lg"  id="email" name="email" value="{{ old('email') }}"required autofocus autocomplete="email" placeholder="Correo electronico">
         </div>
         <div class="form-group">
-            <input id="password" type="password" name="password" required autocomplete="current-password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Contraseña">
+            <input id="password" type="password" name="password" required autocomplete="current-password" class="form-control form-control-lg" placeholder="Contraseña">
         </div>
         <div class="mt-3 d-grid gap-2">
             <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Iniciar sesion</button>

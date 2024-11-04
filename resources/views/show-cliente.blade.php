@@ -1,5 +1,10 @@
 <x-layout :titulo="'Cliente: ' . $cliente->nombre . ' ' . $cliente->apellido">
     <h1>{{ $cliente->name }} {{ $cliente->apellido }}</h1>
+    @if($cliente->archivo)
+        <img src="{{ Storage::url($libro->archivo->ruta) }}" />
+    @else
+        <img src="{{ asset("smile.png") }}"/>
+    @endif
     <p>
         <ul class="cliente-detalles">
             <li>Email: {{ $cliente->email }}</li>

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 use function PHPSTORM_META\map;
@@ -19,7 +20,7 @@ class LibroController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware(['auth', 'verified'], ['except' => ['index', 'show']]);
     }
     /**
      * Display a listing of the resource.
@@ -56,7 +57,8 @@ class LibroController extends Controller
             'stock' => ['required', 'min:1'],
             'fecha_publicacion' => ['required', 'date'],
             'paginas' => ['required', 'min:1'],
-            'etiquetas' => ['required']
+            'etiquetas' => ['required'],
+            'portada' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
         $libro = Libro::create($request->all());
         $ruta = $request->portada->store("portada", "public");
@@ -109,8 +111,22 @@ class LibroController extends Controller
             'stock' => ['required', 'min:1'],
             'fecha_publicacion' => ['required', 'date'],
             'paginas' => ['required', 'min:1'],
+            'etiquetas' => ['required'],
+            'portada' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
         $libro->update($request->all());
+        if($request->hasFile('portada')){
+            if($libro->archivo != null){
+                Storage::disk('public')->delete($libro->archivo->ruta);
+                $libro->archivo()->delete();
+            }
+            $ruta = $request->portada->store("portada", "public");
+            $archivo = new Archivo([
+                "nombre_original" => $request->portada->getClientOriginalName(),
+                "ruta" => $ruta
+            ]);
+            $libro->archivo()->save($archivo);
+        }
         $libro->etiquetas()->sync($request->etiquetas);
         return redirect()->route('libro.index');
     }
@@ -121,6 +137,10 @@ class LibroController extends Controller
     public function destroy(Libro $libro)
     {
         $this->authorize('delete', $libro);
+        if($libro->archivo != null){
+            Storage::disk('public')->delete($libro->archivo->ruta);
+            $libro->archivo()->delete();
+        }
         $libro->delete();
         return redirect()->route('libro.index');
     }

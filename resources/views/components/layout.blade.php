@@ -196,7 +196,7 @@
           <ul class="nav">
             @auth
             <li class="nav-item nav-profile">
-              <a href="#" class="nav-link">
+              <a href="{{ route("profile.show") }}" class="nav-link">
                 <div class="nav-profile-image">
                   @if($user->profile_photo_path != NULL)
                   <img src="{{ asset('storage/' . $user->profile_photo_path)}}" alt="profile" />
