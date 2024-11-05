@@ -155,6 +155,40 @@
                                         </tr>
                                     @endforeach
                                 @endif
+                                {{-- Renderizar las compras si el modelo es compra --}}
+                                    @if($modelo == "compra")
+                                        @foreach($elementos as $compra)
+                                            <tr>
+                                                <td>{{ $compra->id }}</td>
+                                                <td>{{ $compra->user->name }} {{ $compra->user->apellido }}</td>
+                                                <td>{{ $compra->libro->titulo }}</td>
+                                                <td>${{ number_format($compra->precio, 2) }}</td>
+                                                <td>{{ $compra->stock }}</td>
+                                                <td>{{ ucfirst($compra->estado) }}</td>
+                                                <td>{{ $compra->fecha_cambio_estado ? $compra->fecha_cambio_estado->format('d/m/Y') : 'No disponible' }}</td>
+                                                <td>
+                                                    @can('update', $compra)
+                                                        <a href="{{ route('compra.edit', $compra) }}">
+                                                            <button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button>
+                                                        </a>
+                                                    @endcan
+                                                    @can('view', $compra)
+                                                        <a href="{{ route('compra.show', $compra) }}">
+                                                            <button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button>
+                                                        </a>
+                                                    @endcan
+                                                    @can('delete', $compra)
+                                                        <form action="{{ route('compra.destroy', $compra) }}" method="POST" style="display:inline;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-outline-danger btn-rounded py-2 px-3">Borrar</button>
+                                                        </form>
+                                                    @endcan
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+
                                 {{-- Renderizar los permisos si el modelo es permiso --}}
                                 @if($modelo == "permiso")
                                     @foreach($elementos as $permiso)
