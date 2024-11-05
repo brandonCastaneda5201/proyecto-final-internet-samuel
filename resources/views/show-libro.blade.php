@@ -14,6 +14,7 @@
             <li>Edicion: {{ $libro->edicion }}</li>
             <li>Paginas: {{ $libro->paginas }}</li>
             <li>Stock: {{ $libro->stock }}</li>
+            <li>Precio: {{ $libro->precio }}</li>
             <span>Etiquetas: </span>
             @foreach ($libro->etiquetas as $etiqueta)
                 <li value="{{ $etiqueta->id }}">

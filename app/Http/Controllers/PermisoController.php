@@ -78,6 +78,7 @@ class PermisoController extends Controller
             'delete-cliente' => $request->has('delete-cliente'),
             'show-permiso' => $request->has('show-permiso'),
             'edit-permiso' => $request->has('edit-permiso'),
+            'compra-libro' => $request->has('compra-libro'),
         ]);
         return redirect()->route('permiso.index');
     }

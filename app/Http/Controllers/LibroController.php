@@ -57,6 +57,7 @@ class LibroController extends Controller
             'stock' => ['required', 'min:1'],
             'fecha_publicacion' => ['required', 'date'],
             'paginas' => ['required', 'min:1'],
+            'precio' => ['required', 'min:1'],
             'etiquetas' => ['required'],
             'portada' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
@@ -112,6 +113,7 @@ class LibroController extends Controller
             'fecha_publicacion' => ['required', 'date'],
             'paginas' => ['required', 'min:1'],
             'etiquetas' => ['required'],
+            'precio' => ['required', 'min:1'],
             'portada' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
         $libro->update($request->all());

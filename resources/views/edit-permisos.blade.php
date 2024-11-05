@@ -156,6 +156,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check form-check-warning form-group row">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" id="compra-libro" name="compra-libro" value="1" @if(old('compra-libro', $permiso->getAttribute('compra-libro'))) checked @endif> Compra de libros <i class="input-helper"></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

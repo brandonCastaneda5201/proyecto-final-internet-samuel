@@ -29,6 +29,7 @@ class Permiso extends Model
         'create-permiso',
         'edit-permiso',
         'delete-permiso',
+        'compra-libro',
     ];
     use HasFactory;
     public function user(){

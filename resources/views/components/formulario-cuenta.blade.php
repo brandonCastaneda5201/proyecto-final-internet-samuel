@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset("purpleAdmin/vendors/ti-icons/css/themify-icons.css") }}">
     <link rel="stylesheet" href="{{ asset("purpleAdmin/vendors/css/vendor.bundle.base.css") }}">
     <link rel="stylesheet" href="{{ asset("purpleAdmin/vendors/font-awesome/css/font-awesome.min.css") }}">
+    <link rel="icon" href="{{ asset("logo.png") }}" type="image/x-icon">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->

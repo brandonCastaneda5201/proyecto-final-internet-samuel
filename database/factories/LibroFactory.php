@@ -26,7 +26,8 @@ class LibroFactory extends Factory
             'sinopsis' => $this->faker->paragraph, 
             'stock' => $this->faker->numberBetween(1, 100), 
             'fecha_publicacion' => $this->faker->date,  
-            'paginas' => $this->faker->numberBetween(50, 500),  
+            'paginas' => $this->faker->numberBetween(50, 500),
+            'precio' => $this->faker->numberBetween(50, 500),
         ];
     }
 

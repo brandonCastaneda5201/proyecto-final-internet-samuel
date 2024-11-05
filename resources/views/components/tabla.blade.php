@@ -18,6 +18,7 @@
                                         <th>Stock</th>
                                         <th>Fecha de Publicación</th>
                                         <th>Páginas</th>
+                                        <th>Precio</th>
                                         <th>Etiquetas</th>
                                         <th>Acciones</th>
                                     @endif
@@ -81,6 +82,7 @@
                                             <td>{{ $libro->stock }}</td>
                                             <td>{{ $libro->fecha_publicacion }}</td>
                                             <td>{{ $libro->paginas }}</td>
+                                            <td>{{ $libro->precio }}</td>
                                             <td>
                                                 @foreach($libro->etiquetas as $etiqueta)
                                                     {{ $etiqueta->nombre }},

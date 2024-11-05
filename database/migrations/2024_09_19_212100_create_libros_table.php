@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer("stock")->min(1)->default(1);
             $table->string("fecha_publicacion");
             $table->integer("paginas")->min(1)->default(1);
+            $table->integer("precio")->min(1)->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

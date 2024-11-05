@@ -103,7 +103,16 @@
                     </div>
                     </div>
                 </div>
-
+                <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                    <label for="precio" class="col-sm-3 col-form-label">Precio:</label>
+                    <div class="col-sm-9">
+                        <input id="precio" name="precio" value="{{ old('precio') ?? $libro->precio }}" type="number" class="form-control"/>
+                    </div>
+                    </div>
+                </div>
+                </div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
