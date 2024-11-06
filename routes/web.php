@@ -4,6 +4,7 @@ use App\Http\Controllers\LibroController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EtiquetaController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\CompraController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,9 @@ Route::resource('etiqueta', EtiquetaController::class)->parameters(['etiqueta' =
 
 // Ruta para los permisos
 Route::resource('permiso', PermisoController::class)->parameters(['permiso' => 'permiso']);
+
+//Ruta para las compras
+Route::resource('compra', CompraController::class)->parameters(['compra' => 'compra']);
 
 Route::middleware([
     'auth:sanctum',

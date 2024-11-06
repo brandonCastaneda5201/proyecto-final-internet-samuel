@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Libro;
+use App\Models\Compra;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
@@ -22,6 +24,9 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'apellido' => $this->faker->lastName(), 
+            'telefono' => $this->faker->phoneNumber(), 
+            'direccion' => $this->faker->address(), 
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
@@ -64,5 +69,19 @@ class UserFactory extends Factory
                 ->when(is_callable($callback), $callback),
             'ownedTeams'
         );
+    }
+    public function configure(){
+        return $this->afterCreating(function (User $usuario) {
+             // Get all Libro records and choose one at random
+             $randomLibro = Libro::inRandomOrder()->first();
+            
+             if ($randomLibro && $usuario) {
+                 // Use the Compra factory to create a Compra associated with the random libro and user
+                 Compra::factory()->create([
+                     'user_id' => $usuario->id,
+                     'libro_id' => $randomLibro->id,
+                 ]);
+             }
+        });
     }
 }
