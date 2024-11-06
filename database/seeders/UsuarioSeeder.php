@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\Permiso;
 
 class UsuarioSeeder extends Seeder
 {
@@ -14,9 +15,8 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->unverified()->withPersonalTeam()->create([
-            'name' => 'Brandon C.',
-            'email' => 'testeo1234@testeo1234.com',
-        ]);
+        User::factory()->has(Permiso::factory()->state(function (array $attributes, User $user) {
+            return ['user_id' => $user->id];
+        }))->count(5)->create();
     }
 }

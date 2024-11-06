@@ -165,7 +165,8 @@
                                                 <td>${{ number_format($compra->precio, 2) }}</td>
                                                 <td>{{ $compra->stock }}</td>
                                                 <td>{{ ucfirst($compra->estado) }}</td>
-                                                <td>{{ $compra->fecha_cambio_estado ? $compra->fecha_cambio_estado->format('d/m/Y') : 'No disponible' }}</td>
+                                                <td>{{ $compra->fecha_cambio_estado ? \Carbon\Carbon::parse($compra->fecha_cambio_estado)->format('d/m/Y') : 'No disponible' }}</td>
+
                                                 <td>
                                                     @can('update', $compra)
                                                         <a href="{{ route('compra.edit', $compra) }}">
