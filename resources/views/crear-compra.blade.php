@@ -3,6 +3,11 @@
     <a class="text-white-no-decor" href="{{ route('compra.index') }}">
         <button class="btn btn-gradient-info btn-rounded btn-fw border-bottom-separate">Volver al listado</button>
     </a><br>
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     
     <div class="col-12 grid-margin">
         <div class="card">

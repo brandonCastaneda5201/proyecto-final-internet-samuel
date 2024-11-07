@@ -33,6 +33,11 @@ Route::resource('permiso', PermisoController::class)->parameters(['permiso' => '
 //Ruta para las compras
 Route::resource('compra', CompraController::class)->parameters(['compra' => 'compra']);
 
+//Ruta para realizar las compras de libros
+Route::get('/comprar/{id}', [LibroController::class, 'comprarVista'])->name('libro.comprar');
+Route::post('/crear-compra/{libro}', [LibroController::class, 'comprar'])->name('libro.crear-compra');
+Route::post('/cancelar-compra/{compra}', [CompraController::class, 'cancelar'])->name('compra.cancelar-compra');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

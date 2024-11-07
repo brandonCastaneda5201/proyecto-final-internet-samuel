@@ -5,17 +5,27 @@ namespace App\Http\Controllers;
 use App\Models\Compra;
 use App\Models\User;
 use App\Models\Libro;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $this->authorize('viewAny', Compra::class);
-        $compras = Compra::with(['user', 'libro'])->get();
+        $usuario = Auth::user()->load('permiso');
+        if($usuario->permiso->getAttribute('show-compra')){
+            $compras = Compra::with(['user', 'libro'])->get();
+        } else{
+            $compras = Compra::with(['user', 'libro'])->where('user_id', $usuario->id)->get();
+        }
         return view('listado-compras', compact('compras'));
     }
 
@@ -44,9 +54,18 @@ class CompraController extends Controller
             'estado' => 'required|in:cancelado,completado,pagado,reservado',
             'fecha_cambio_estado' => 'nullable|date',
         ]);
-
+        $libro = Libro::find($request->libro_id);
+        if($libro->stock < $request->stock){
+            return redirect()->route('compra.create')->with('error', 'No hay stock suficiente para ese libro.');
+        }
+        if($request->fecha_cambio_estado != null){
+            $request->fecha_cambio_estado = Carbon::parse($request->fecha_cambio_estado)->setTime(now()->hour, now()->minute, now()->second);
+        }
         Compra::create($request->all());
-
+        if($request->estado != 'cancelado'){
+            $libro->stock -= $request->stock;
+        }
+        $libro->save();
         return redirect()->route('compra.index')->with('success', 'Compra creada exitosamente.');
     }
 
@@ -84,10 +103,27 @@ class CompraController extends Controller
             'estado' => 'required|in:cancelado,completado,pagado,reservado',
             'fecha_cambio_estado' => 'nullable|date',
         ]);
-
+        if($request->fecha_cambio_estado != null){
+            $timestamp = Carbon::parse($request->fecha_cambio_estado)->setTime(now()->hour, now()->minute, now()->second);
+            $request->fecha_cambio_estado = $timestamp;
+        }
         $compra->update($request->all());
 
         return redirect()->route('compra.index')->with('success', 'Compra actualizada exitosamente.');
+    }
+
+    public function cancelar(Request $request, Compra $compra){
+        $this->authorize('view', $compra);
+        if($compra->estado != "reservado"){
+            return redirect()->route('compra.index')->with('error', 'No se puede realizar esa accion.');
+        }
+        $libro = Libro::find($compra->libro_id);
+        $compra->estado = 'cancelado';
+        $compra->fecha_cambio_estado = Carbon::now();
+        $libro->stock += $compra->stock;
+        $libro->save();
+        $compra->save();
+        return redirect()->route('compra.index')->with('success', 'Tu compra se cancelo con exito.');
     }
 
     /**

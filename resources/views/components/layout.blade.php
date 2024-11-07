@@ -238,14 +238,14 @@
                   </a>
                 </li>
               @endcan
-              @can('viewAny', App\Models\Compra::class)
+              @auth
               <li class="nav-item">
                   <a class="nav-link" href="{{ route('compra.index') }}">
                       <span class="menu-title">Compras</span>
                       <i class="fa fa-shopping-cart menu-icon"></i>
                   </a>
               </li>
-             @endcan
+             @endauth
               @can('viewAny', App\Models\Permiso::class)
                 <li class="nav-item">
                   <a class="nav-link" href="{{ route('permiso.index') }}">

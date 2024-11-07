@@ -15,7 +15,7 @@ class Compra extends Model
         'precio',
         'stock',
         'estado',
-        'fecha_estado',
+        'fecha_cambio_estado',
     ];
 
     public function user()

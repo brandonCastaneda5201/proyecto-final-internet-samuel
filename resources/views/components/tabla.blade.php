@@ -41,6 +41,18 @@
                                         <th>Acciones</th>
                                     @endif
 
+                                    {{-- Si el modelo es cliente, renderizar la tabla de clientes --}}
+                                    @if($modelo == "compra")
+                                        <th>ID</th>
+                                        <th>Usuario</th>
+                                        <th>Libro</th>
+                                        <th>Precio final</th>
+                                        <th>Stock solicitado</th>
+                                        <th>Estado</th>
+                                        <th>Fecha actualizado</th>
+                                        <th>Acciones</th>
+                                    @endif
+
                                     @if($modelo == "permiso")
                                         <th>ID</th>
                                         <th>ID del usuario</th>
@@ -89,6 +101,11 @@
                                                 @endforeach
                                             </td>
                                             <td>
+                                            @if($libro->stock > 0)
+                                                @can('comprar', $libro)
+                                                    <a href="{{ route('libro.comprar', $libro->id) }}"><button class="btn btn-outline-info btn-rounded py-2 px-3">Comprar</button></a>
+                                                @endcan
+                                            @endif
                                             @can('edit', $libro)   
                                                 <a href="{{ route('libro.edit', $libro) }}"><button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button></a>
                                             @endif
@@ -173,11 +190,19 @@
                                                             <button class="btn btn-outline-warning btn-rounded py-2 px-3">Editar</button>
                                                         </a>
                                                     @endcan
-                                                    @can('view', $compra)
+                                                    @auth
                                                         <a href="{{ route('compra.show', $compra) }}">
                                                             <button class="btn btn-outline-success btn-rounded py-2 px-3">Ver detalles</button>
                                                         </a>
-                                                    @endcan
+                                                    @endauth
+                                                    @cannot('update', $compra)
+                                                        @if($compra->user_id == $user->id && $compra->estado == "reservado")
+                                                            <form action="{{ route('compra.cancelar-compra', $compra) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                <button class="btn btn-outline-secondary btn-rounded py-2 px-3">Cancelar</button>
+                                                            </form>
+                                                        @endif
+                                                    @endcannot
                                                     @can('delete', $compra)
                                                         <form action="{{ route('compra.destroy', $compra) }}" method="POST" style="display:inline;">
                                                             @csrf

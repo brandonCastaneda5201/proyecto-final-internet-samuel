@@ -14,7 +14,7 @@
             <li>Precio: ${{ number_format($compra->precio, 2) }}</li>
             <li>Stock: {{ $compra->stock }}</li>
             <li>Estado: {{ ucfirst($compra->estado) }}</li>
-            <li>Fecha de cambio de estado: {{ $compra->fecha_cambio_estado ? $compra->fecha_cambio_estado->format('d/m/Y') : 'No disponible' }}</li>
+            <li>Fecha de cambio de estado: {{ $compra->fecha_cambio_estado ? \Carbon\Carbon::parse($compra->fecha_cambio_estado)->format('d/m/Y') : 'No disponible' }}</li>
         </ul>
     </p>
 

@@ -20,7 +20,11 @@ class CompraPolicy
      */
     public function view(User $user, Compra $model): bool
     {
-        return $user->permiso->getAttribute('show-compra');
+        if($user->permiso->getAttribute('show-compra')){
+            return $user->permiso->getAttribute('show-compra');
+        } else{
+            return $user->id == $model->user_id;
+        }
     }
 
     /**

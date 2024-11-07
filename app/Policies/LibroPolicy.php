@@ -53,6 +53,11 @@ class LibroPolicy
         return $user->permiso->getAttribute('delete-libro');
     }
 
+    public function comprar(User $user, Libro $model): bool
+    {
+        return $user->permiso->getAttribute('compra-libro');
+    }
+
     /**
      * Determine whether the user can restore the model.
      */
