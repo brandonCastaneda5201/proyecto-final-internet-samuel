@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Libro;
+use App\Models\Compra;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,16 +10,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class LibroCreado extends Mailable
+class CompraRealizadaMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public Libro $libro)
+    public function __construct(public Compra $compra)
     {
-        
+        //
     }
 
     /**
@@ -28,7 +28,7 @@ class LibroCreado extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Se ha publicado un nuevo libro',
+            subject: 'Gracias por comprar en nuestra tienda exitosa!',
         );
     }
 
@@ -38,7 +38,7 @@ class LibroCreado extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.libro-creado',
+            markdown: 'emails.compra-realizada',
         );
     }
 

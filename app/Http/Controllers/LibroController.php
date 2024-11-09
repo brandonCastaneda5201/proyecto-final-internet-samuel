@@ -8,6 +8,7 @@ use App\Models\Libro;
 use App\Models\Etiqueta;
 use App\Models\User;
 use App\Models\Compra;
+use App\Mail\CompraRealizadaMail;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
@@ -63,18 +64,20 @@ class LibroController extends Controller
             'portada' => ['nullable', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
         $libro = Libro::create($request->all());
-        $ruta = $request->portada->store("portada", "public");
-        $archivo = new Archivo([
-            "nombre_original" => $request->portada->getClientOriginalName(),
-            "ruta" => $ruta
-        ]);
-        $libro->archivo()->save($archivo);
+        if($request->hasFile('portada')){
+            $ruta = $request->portada->store("portada", "public");
+            $archivo = new Archivo([
+                "nombre_original" => $request->portada->getClientOriginalName(),
+                "ruta" => $ruta
+            ]);
+            $libro->archivo()->save($archivo);
+        }
         $libro->etiquetas()->attach($request->etiquetas);
         $usuarios = User::pluck("email");
         foreach($usuarios as $usuario){
             Mail::to($usuario)->send(new LibroCreado($libro));
         }
-        return redirect()->route('libro.index');
+        return redirect()->route('libro.index')->with('success', 'Libro creado con exito.');
     }
 
     /**
@@ -131,7 +134,7 @@ class LibroController extends Controller
             $libro->archivo()->save($archivo);
         }
         $libro->etiquetas()->sync($request->etiquetas);
-        return redirect()->route('libro.index');
+        return redirect()->route('libro.index')->with('success', 'Libro actualizado con exito.');
     }
 
     /**
@@ -145,7 +148,7 @@ class LibroController extends Controller
             $libro->archivo()->delete();
         }
         $libro->delete();
-        return redirect()->route('libro.index');
+        return redirect()->route('libro.index')->with('success', 'Libro eliminado con exito.');
     }
 
     public function comprarVista($id){
@@ -173,7 +176,7 @@ class LibroController extends Controller
             'stock' => ['required', 'min:1', 'max:' . $libro->stock],
             'method_pay' => 'required|in:tarjeta_bancaria,efectivo',
         ]);
-        Compra::create([
+        $compra = Compra::create([
             'user_id' => $usuario->id,
             'libro_id' => $libro->id,
             'precio' => ($request->stock * $libro->precio),
@@ -183,6 +186,8 @@ class LibroController extends Controller
         ]);
         $libro->stock -= $request->stock;
         $libro->save();
-        return redirect()->route('compra.index');
+        $compra->libro = $libro;
+        Mail::to($usuario->email)->send(new CompraRealizadaMail($compra));
+        return redirect()->route('compra.index')->with('success', 'Gracias por comprar en nuestra libreria.');
     }
 }

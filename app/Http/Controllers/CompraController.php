@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Compra;
+use App\Mail\CompraRealizadaMail;
 use App\Models\User;
 use App\Models\Libro;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,7 @@ class CompraController extends Controller
         if($usuario->permiso->getAttribute('show-compra')){
             $compras = Compra::with(['user', 'libro'])->get();
         } else{
-            $compras = Compra::with(['user', 'libro'])->where('user_id', $usuario->id)->get();
+            $compras = Compra::where('user_id', $usuario->id)->with(['user', 'libro'])->get();
         }
         return view('listado-compras', compact('compras'));
     }

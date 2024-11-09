@@ -41,7 +41,7 @@ class EtiquetaController extends Controller
         ]);
         $etiqueta = Etiqueta::create($request->all());
 
-        return redirect()->route('etiqueta.index');
+        return redirect()->route('etiqueta.index')->with('success', 'Etiqueta creada con exito.');
     }
 
     /**
@@ -72,7 +72,7 @@ class EtiquetaController extends Controller
         ]);
         $etiqueta->update($request->all());
 
-        return redirect()->route('etiqueta.index');
+        return redirect()->route('etiqueta.index')->with('success', 'Etiqueta actualizada con exito.');
     }
 
     /**
@@ -82,6 +82,6 @@ class EtiquetaController extends Controller
     {
         $this->authorize('delete', $etiqueta);
         $etiqueta->delete();
-        return redirect()->route('etiqueta.index');
+        return redirect()->route('etiqueta.index')->with('success', 'Etiqueta eliminada con exito.');
     }
 }

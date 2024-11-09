@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Permiso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,8 +20,8 @@ class ClienteController extends Controller
     public function index()
     {
         $this->authorize('viewAny', User::class);
-        $clientes = User::all();  // Obtiene todos los usuarios
-        return view("listado-clientes", compact("clientes"));  // Asegúrate de que la vista exista
+        $clientes = User::all();
+        return view("listado-clientes", compact("clientes"));
     }
 
     /**
@@ -48,7 +49,7 @@ class ClienteController extends Controller
         ]);
 
        
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'apellido' => $request->apellido,
             'email' => $request->email,
@@ -57,7 +58,31 @@ class ClienteController extends Controller
             'password' => bcrypt($request->password), 
         ]);
 
-        return redirect()->route('cliente.index');  
+        Permiso::create([
+            'user_id' => $user->id,
+            'show-libro' => true,
+            'create-libro' => false,
+            'edit-libro' => false,
+            'delete-libro' => false,
+            'show-cliente' => false,
+            'create-cliente' => false,
+            'edit-cliente' => false,
+            'delete-cliente' => false,
+            'show-etiqueta' => false,
+            'create-etiqueta' => false,
+            'edit-etiqueta' => false,
+            'delete-etiqueta' => false,
+            'show-permiso' => false,
+            'edit-permiso' => false,
+            'show-compra' => false,
+            'create-compra' => false,
+            'edit-compra' => false,
+            'delete-compra' => false,
+            'compra-libro' => true,
+        ]);
+        $user->sendEmailVerificationNotification();
+
+        return redirect()->route('cliente.index')->with('success', 'Cliente creado con exito.');  
     }
 
     /**
@@ -95,7 +120,7 @@ class ClienteController extends Controller
 
         $cliente->update($request->only(['name', 'apellido', 'email', 'telefono', 'direccion','password'])); // Actualiza solo los campos permitidos
 
-        return redirect()->route('cliente.index');  
+        return redirect()->route('cliente.index')->with('success', 'Cliente editado con exito.');  
     }
 
     /**
@@ -105,6 +130,6 @@ class ClienteController extends Controller
     {
         $this->authorize('update', User::class);
         $cliente->delete();
-        return redirect()->route('cliente.index');  
+        return redirect()->route('cliente.index')->with('success', 'Cliente eliminado con exito.');  
     }
 }

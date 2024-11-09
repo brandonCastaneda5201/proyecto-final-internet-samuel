@@ -9,6 +9,11 @@
                 {{ session('error') }}
             </div>
         @endif
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
     </p>
     <x-tabla :elementos="$libros" modelo="libro"/>
 </x-layout> 

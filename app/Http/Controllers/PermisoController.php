@@ -80,7 +80,7 @@ class PermisoController extends Controller
             'edit-permiso' => $request->has('edit-permiso'),
             'compra-libro' => $request->has('compra-libro'),
         ]);
-        return redirect()->route('permiso.index');
+        return redirect()->route('permiso.index')->with('success', 'Permiso editado con exito.');
     }
 
     /**
