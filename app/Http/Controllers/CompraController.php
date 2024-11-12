@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Compra;
-use App\Mail\CompraRealizadaMail;
 use App\Models\User;
 use App\Models\Libro;
 use Illuminate\Support\Facades\Auth;

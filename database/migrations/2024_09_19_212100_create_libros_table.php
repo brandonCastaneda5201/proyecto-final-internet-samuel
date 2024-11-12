@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("autor")->max(255);
             $table->string("editorial")->max(255);
             $table->string("edicion")->max(255);
-            $table->string("sinopsis")->max(255);
+            $table->string("sinopsis")->max(600);
             $table->integer("stock")->min(1)->default(1);
             $table->string("fecha_publicacion");
             $table->integer("paginas")->min(1)->default(1);
