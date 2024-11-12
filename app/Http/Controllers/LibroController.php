@@ -74,9 +74,6 @@ class LibroController extends Controller
         }
         $libro->etiquetas()->attach($request->etiquetas);
         $usuarios = User::pluck("email");
-        foreach($usuarios as $usuario){
-            Mail::to($usuario)->send(new LibroCreado($libro));
-        }
         return redirect()->route('libro.index')->with('success', 'Libro creado con exito.');
     }
 
